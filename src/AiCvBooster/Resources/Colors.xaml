@@ -1,0 +1,43 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Brand palette -->
+    <Color x:Key="BackgroundColor">#FF0F172A</Color>
+    <Color x:Key="BackgroundDeepColor">#FF0A1124</Color>
+    <Color x:Key="CardColor">#FF1E293B</Color>
+    <Color x:Key="CardAltColor">#FF273449</Color>
+    <Color x:Key="BorderColor">#FF334155</Color>
+    <Color x:Key="PrimaryColor">#FF6C63FF</Color>
+    <Color x:Key="PrimaryLightColor">#FF8B5CF6</Color>
+    <Color x:Key="AccentColor">#FF22C55E</Color>
+    <Color x:Key="DangerColor">#FFEF4444</Color>
+    <Color x:Key="WarnColor">#FFF59E0B</Color>
+    <Color x:Key="TextPrimaryColor">#FFF8FAFC</Color>
+    <Color x:Key="TextSecondaryColor">#FF94A3B8</Color>
+    <Color x:Key="TextMutedColor">#FF64748B</Color>
+
+    <SolidColorBrush x:Key="BackgroundBrush"       Color="{StaticResource BackgroundColor}"/>
+    <SolidColorBrush x:Key="BackgroundDeepBrush"   Color="{StaticResource BackgroundDeepColor}"/>
+    <SolidColorBrush x:Key="CardBrush"             Color="{StaticResource CardColor}"/>
+    <SolidColorBrush x:Key="CardAltBrush"          Color="{StaticResource CardAltColor}"/>
+    <SolidColorBrush x:Key="BorderBrush.Soft"      Color="{StaticResource BorderColor}"/>
+    <SolidColorBrush x:Key="PrimaryBrush"          Color="{StaticResource PrimaryColor}"/>
+    <SolidColorBrush x:Key="PrimaryLightBrush"     Color="{StaticResource PrimaryLightColor}"/>
+    <SolidColorBrush x:Key="AccentBrush"           Color="{StaticResource AccentColor}"/>
+    <SolidColorBrush x:Key="DangerBrush"           Color="{StaticResource DangerColor}"/>
+    <SolidColorBrush x:Key="WarnBrush"             Color="{StaticResource WarnColor}"/>
+    <SolidColorBrush x:Key="TextPrimaryBrush"      Color="{StaticResource TextPrimaryColor}"/>
+    <SolidColorBrush x:Key="TextSecondaryBrush"    Color="{StaticResource TextSecondaryColor}"/>
+    <SolidColorBrush x:Key="TextMutedBrush"        Color="{StaticResource TextMutedColor}"/>
+
+    <LinearGradientBrush x:Key="PrimaryGradientBrush" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="{StaticResource PrimaryColor}"      Offset="0.0"/>
+        <GradientStop Color="{StaticResource PrimaryLightColor}" Offset="1.0"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="BackgroundGradientBrush" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="{StaticResource BackgroundDeepColor}" Offset="0.0"/>
+        <GradientStop Color="{StaticResource BackgroundColor}"     Offset="1.0"/>
+    </LinearGradientBrush>
+
+</ResourceDictionary>
