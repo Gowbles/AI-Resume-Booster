@@ -1,0 +1,180 @@
+<UserControl x:Class="AiCvBooster.Views.ResultView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:conv="clr-namespace:AiCvBooster.Converters"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+
+    <UserControl.Resources>
+        <conv:ScoreToBrushConverter x:Key="ScoreToBrush"/>
+    </UserControl.Resources>
+
+    <Grid Margin="32,8,32,32">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header row: score + weaknesses -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="360"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Score card -->
+            <Border Style="{StaticResource Card}" Margin="0,0,16,0">
+                <StackPanel>
+                    <TextBlock Text="CV SCORE" Style="{StaticResource Text.Label}"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,6,0,8">
+                        <TextBlock Text="{Binding Score}"
+                                   FontSize="56" FontWeight="Bold"
+                                   Foreground="{Binding Score, Converter={StaticResource ScoreToBrush}}"/>
+                        <TextBlock Text="/100"
+                                   FontSize="22"
+                                   VerticalAlignment="Bottom"
+                                   Margin="6,0,0,12"
+                                   Foreground="{StaticResource TextMutedBrush}"/>
+                    </StackPanel>
+                    <TextBlock Text="{Binding ScoreLabel}"
+                               Style="{StaticResource Text.Subtitle}"
+                               Margin="0,0,0,14"/>
+                    <ProgressBar Minimum="0" Maximum="100" Value="{Binding Score, Mode=OneWay}"
+                                 Height="10"
+                                 Foreground="{Binding Score, Converter={StaticResource ScoreToBrush}}"
+                                 Background="#1F2A44"
+                                 BorderThickness="0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Weaknesses card -->
+            <Border Grid.Column="1" Style="{StaticResource Card}">
+                <StackPanel>
+                    <TextBlock Text="WEAK POINTS" Style="{StaticResource Text.Label}"/>
+                    <ItemsControl ItemsSource="{Binding Weaknesses}" Margin="0,10,0,0">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Margin="0,4,0,4">
+                                    <materialDesign:PackIcon Kind="AlertCircleOutline"
+                                                             Width="18" Height="18"
+                                                             Foreground="{StaticResource WarnBrush}"
+                                                             VerticalAlignment="Top" Margin="0,3,10,0"/>
+                                    <TextBlock Text="{Binding}"
+                                               Style="{StaticResource Text.Body}"
+                                               TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Keywords chips -->
+        <Border Grid.Row="1" Style="{StaticResource Card}" Margin="0,16,0,0">
+            <StackPanel>
+                <TextBlock Text="ATS KEYWORDS" Style="{StaticResource Text.Label}" Margin="0,0,0,10"/>
+                <ItemsControl ItemsSource="{Binding Keywords}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Style="{StaticResource Chip}">
+                                <TextBlock Text="{Binding}"
+                                           Foreground="{StaticResource TextPrimaryBrush}"
+                                           FontSize="12"/>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </Border>
+
+        <!-- Side-by-side CVs -->
+        <Grid Grid.Row="2" Margin="0,16,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Style="{StaticResource Card}" Margin="0,0,8,0">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,10">
+                        <Border Width="10" Height="10" CornerRadius="5"
+                                Background="{StaticResource TextMutedBrush}"
+                                VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <TextBlock Text="ORIGINAL" Style="{StaticResource Text.Label}"/>
+                    </StackPanel>
+                    <TextBox Text="{Binding OriginalText, Mode=OneWay}"
+                             IsReadOnly="True"
+                             BorderThickness="0"
+                             Background="Transparent"
+                             Foreground="{StaticResource TextSecondaryBrush}"
+                             FontFamily="Consolas, Segoe UI"
+                             FontSize="13"
+                             TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto"/>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Column="1" Style="{StaticResource Card}" Margin="8,0,0,0">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#1E293B" Offset="0"/>
+                        <GradientStop Color="#241F3E" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,10">
+                        <Border Width="10" Height="10" CornerRadius="5"
+                                Background="{StaticResource AccentBrush}"
+                                VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <TextBlock Text="AI-IMPROVED" Style="{StaticResource Text.Label}"
+                                   Foreground="{StaticResource AccentBrush}"/>
+                    </StackPanel>
+                    <TextBox Text="{Binding ImprovedText, Mode=OneWay}"
+                             IsReadOnly="True"
+                             BorderThickness="0"
+                             Background="Transparent"
+                             Foreground="{StaticResource TextPrimaryBrush}"
+                             FontFamily="Consolas, Segoe UI"
+                             FontSize="13"
+                             TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto"/>
+                </DockPanel>
+            </Border>
+        </Grid>
+
+        <!-- Actions -->
+        <Grid Grid.Row="3" Margin="0,20,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="← Start over"
+                    Style="{StaticResource Btn.Ghost}"
+                    Command="{Binding StartOverCommand}"/>
+
+            <TextBlock Grid.Column="1"
+                       Text="{Binding ToastMessage}"
+                       Foreground="{StaticResource AccentBrush}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
+
+            <StackPanel Grid.Column="2" Orientation="Horizontal">
+                <Button Content="Copy improved"
+                        Style="{StaticResource Btn.Ghost}"
+                        Command="{Binding CopyImprovedCommand}"
+                        Margin="0,0,12,0"/>
+                <Button Content="Save as .txt"
+                        Style="{StaticResource Btn.Primary}"
+                        Command="{Binding SaveCommand}"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>
